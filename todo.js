@@ -1,4 +1,4 @@
-const todos = getSavedTodos();
+let todos = getSavedTodos();
 
 const filters = {
     searchText: '',
@@ -28,5 +28,13 @@ document.querySelector('#add_todo_form').addEventListener('submit', function(e){
 document.querySelector('#hide_completed').addEventListener('change', function(e){
     filters.hideCompleted = e.target.checked; 
     renderTodos(todos, filters);
+});
+
+window.addEventListener('storage', function(e){
+    if(e.key === 'todos'){
+        todos = JSON.parse(e.newValue);
+        saveTodos(todos);
+        renderTodos(todos, filters);
+    }
 });
 
