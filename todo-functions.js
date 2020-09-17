@@ -52,13 +52,16 @@ const generateTodoDOM = function(item){
     check.checked = item.completed;
     const textElement = document.createElement('span');
     const deleteBtn = document.createElement('button');
+    const editBtn = document.createElement('button');
 
     deleteBtn.textContent = 'x';
     textElement.textContent = item.text;
+    editBtn.textContent = 'Edit';
 
     todoElement.appendChild(check);
     todoElement.appendChild(textElement);
     todoElement.appendChild(deleteBtn);
+    todoElement.appendChild(editBtn);
 
     deleteBtn.addEventListener('click', function(){
         removeTodo(item.id);
@@ -70,6 +73,10 @@ const generateTodoDOM = function(item){
         updateTodo(item.id);
         saveTodos(todos);
         renderTodos(todos, filters);
+    });
+
+    editBtn.addEventListener('click', function(){
+        location.assign(`${location.origin}/edit.html#${item.id}`);
     });
     
     return todoElement;
