@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+</head>
+<body>
+    <h1>Todos</h1>
+    <form id="add_todo_form">
+        <input type="text" id="add_todo_text" name="add_todo_text" placeholder="Add a New Todo">
+        <button type="submit" id="add_todo">Add Todo</button>
+    </form><br>
+    <label>
+        <input type="checkbox" id="hide_completed"> Hide Completed.
+    </label><br><br>
+    <input type="text" id="search_todo" placeholder="Search Todo..."><br>
+    <div id="todos_div">
+    </div>
+    <script src="uuid.js"></script>
+    <script src="todo-functions.js"></script>
+    <script src="todo.js"></script>
+</body>
+</html>
