@@ -1,3 +1,5 @@
+'use strict';
+
 const todoId = location.hash.substr(1);
 let todos = getSavedTodos();
 let todo = todos.find((item) => {

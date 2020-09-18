@@ -1,6 +1,4 @@
-// Functions File
-
-let cb_value;
+'use strict';
 
 // Fetch data from Local Storage if it exists 
 const getSavedTodos = () => {
