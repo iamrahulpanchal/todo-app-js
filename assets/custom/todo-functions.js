@@ -3,7 +3,7 @@
 let cb_value;
 
 // Fetch data from Local Storage if it exists 
-const getSavedTodos = function(){
+const getSavedTodos = () => {
     const todosJSON = localStorage.getItem('todos');
     if(todosJSON !== null){
         return JSON.parse(todosJSON);
@@ -13,39 +13,40 @@ const getSavedTodos = function(){
 }
 
 // Save the todo to localStorage
-const saveTodos = function(todos){
+const saveTodos = (todos) => {
     localStorage.setItem('todos', JSON.stringify(todos));
 }
 
 // Get left todos summary 
-const getLeftTodos = function(leftTodos){
+const getLeftTodos = (leftTodos) => {
     const summary = document.createElement('h3');
     summary.textContent = `You have ${leftTodos.length} todos left`;
     document.querySelector('#todos_div').appendChild(summary);
 }
 
 // Remove a todo from list by id
-const removeTodo = function(id){
-    const todoIndex = todos.findIndex(function(item){
-        return item.id === id;
-    });
+const removeTodo = (id) => {
+
+    const todoIndex = todos.findIndex((item) => item.id === id);
+
     if(todoIndex > -1){
         todos.splice(todoIndex, 1);
     }
 }
 
 // Updating the todo completed value
-const updateTodo = function(id){
-    const todo = todos.find(function(item){
-        return item.id === id;
-    });
+const updateTodo = (id) => {
+    // const todo = todos.find(function(item){
+    //     return item.id === id;
+    // });
+    const todo = todos.find((item) => item.id === id);
     if(todo !== undefined){
         todo.completed = !todo.completed;
     }
 }
 
 // Creating a new p element for displaying todos
-const generateTodoDOM = function(item){
+const generateTodoDOM = (item) => {
     const todoElement = document.createElement('div');
     const check = document.createElement("input");
     check.setAttribute("type", "checkbox");
@@ -66,19 +67,19 @@ const generateTodoDOM = function(item){
     todoElement.appendChild(editBtn);
     todoElement.appendChild(spanElement);
 
-    deleteBtn.addEventListener('click', function(){
+    deleteBtn.addEventListener('click', () => {
         removeTodo(item.id);
         saveTodos(todos);
         renderTodos(todos, filters);      
     });
 
-    check.addEventListener('change', function(e){
+    check.addEventListener('change', (e) => {
         updateTodo(item.id);
         saveTodos(todos);
         renderTodos(todos, filters);
     });
 
-    editBtn.addEventListener('click', function(){
+    editBtn.addEventListener('click', () => {
         location.assign(`${location.origin}/edit.html#${item.id}`);
     });
     
@@ -86,12 +87,12 @@ const generateTodoDOM = function(item){
 };
 
 // Displaying todos on the browser
-const renderTodos = function(todos, filters){
-    let filteredTodos = todos.filter(function(item){
+const renderTodos = (todos, filters) => {
+    let filteredTodos = todos.filter((item) => {
         return item.text.toLowerCase().includes(filters.searchText.toLowerCase());
     });
 
-    filteredTodos = filteredTodos.filter(function(item){
+    filteredTodos = filteredTodos.filter((item) => {
         if(filters.hideCompleted){
             return !item.completed
         } else {
@@ -99,7 +100,7 @@ const renderTodos = function(todos, filters){
         }
     });
 
-    const leftTodos = filteredTodos.filter(function(todos){
+    const leftTodos = filteredTodos.filter((todos) => {
         return !todos.completed;
     });
 
@@ -107,7 +108,7 @@ const renderTodos = function(todos, filters){
 
     getLeftTodos(leftTodos);
 
-    filteredTodos.forEach(function(item){
+    filteredTodos.forEach((item) => {
         if(item.text.length > 0){
             const todoElement = generateTodoDOM(item);
             document.querySelector('#todos_div').appendChild(todoElement);
@@ -116,6 +117,6 @@ const renderTodos = function(todos, filters){
 };
 
 // Generate last updated msg 
-const lastUpdated = function(item){
+const lastUpdated = (item) => {
     return ` Last Updated ${moment(item.updatedAt).fromNow()}`;
 }

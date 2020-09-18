@@ -7,12 +7,12 @@ const filters = {
 
 renderTodos(todos, filters);
 
-document.querySelector('#search_todo').addEventListener('input', function(e){
+document.querySelector('#search_todo').addEventListener('input', (e) => {
     filters.searchText = e.target.value;
     renderTodos(todos, filters);
 });
 
-document.querySelector('#add_todo_form').addEventListener('submit', function(e){
+document.querySelector('#add_todo_form').addEventListener('submit', (e) => {
     e.preventDefault();
     let data = e.target.elements.add_todo_text.value;
     todos.push({
@@ -27,12 +27,12 @@ document.querySelector('#add_todo_form').addEventListener('submit', function(e){
     e.target.elements.add_todo_text.value = '';
 }); 
 
-document.querySelector('#hide_completed').addEventListener('change', function(e){
+document.querySelector('#hide_completed').addEventListener('change', (e) => {
     filters.hideCompleted = e.target.checked; 
     renderTodos(todos, filters);
 });
 
-window.addEventListener('storage', function(e){
+window.addEventListener('storage', (e) => {
     if(e.key === 'todos'){
         todos = JSON.parse(e.newValue);
         saveTodos(todos);
