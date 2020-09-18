@@ -5,9 +5,13 @@ let cb_value;
 // Fetch data from Local Storage if it exists 
 const getSavedTodos = () => {
     const todosJSON = localStorage.getItem('todos');
-    if(todosJSON !== null){
-        return JSON.parse(todosJSON);
-    } else {
+    try{
+        if(todosJSON !== null){
+            return JSON.parse(todosJSON);
+        } else {
+            return [];
+        }
+    } catch(e) {
         return [];
     }
 }
@@ -26,9 +30,7 @@ const getLeftTodos = (leftTodos) => {
 
 // Remove a todo from list by id
 const removeTodo = (id) => {
-
     const todoIndex = todos.findIndex((item) => item.id === id);
-
     if(todoIndex > -1){
         todos.splice(todoIndex, 1);
     }
