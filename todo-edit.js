@@ -12,6 +12,7 @@ document.querySelector('#todo-text-edit').value = todo.text;
 
 document.querySelector('#todo-text-edit').addEventListener('input', function(e){
     todo.text = e.target.value;
+    todo.updatedAt = moment().format('D MMM YYYY, HH:mm:ss');
     saveTodos(todos);
 });
 

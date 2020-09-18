@@ -18,7 +18,9 @@ document.querySelector('#add_todo_form').addEventListener('submit', function(e){
     todos.push({
         id: uuidv4(),
         text: data,
-        completed: false
+        completed: false,
+        createdAt: moment().format('D MMM YYYY, HH:mm:ss'),
+        updatedAt: moment().format('D MMM YYYY, HH:mm:ss')
     });
     saveTodos(todos);
     renderTodos(todos, filters);
@@ -37,4 +39,3 @@ window.addEventListener('storage', function(e){
         renderTodos(todos, filters);
     }
 });
-

@@ -50,6 +50,7 @@ const generateTodoDOM = function(item){
     const check = document.createElement("input");
     check.setAttribute("type", "checkbox");
     check.checked = item.completed;
+    const spanElement = document.createElement('span');
     const textElement = document.createElement('span');
     const deleteBtn = document.createElement('button');
     const editBtn = document.createElement('button');
@@ -57,11 +58,13 @@ const generateTodoDOM = function(item){
     deleteBtn.textContent = 'x';
     textElement.textContent = item.text;
     editBtn.textContent = 'Edit';
+    spanElement.textContent = lastUpdated(item);
 
     todoElement.appendChild(check);
     todoElement.appendChild(textElement);
     todoElement.appendChild(deleteBtn);
     todoElement.appendChild(editBtn);
+    todoElement.appendChild(spanElement);
 
     deleteBtn.addEventListener('click', function(){
         removeTodo(item.id);
@@ -111,3 +114,8 @@ const renderTodos = function(todos, filters){
         }    
     });
 };
+
+// Generate last updated msg 
+const lastUpdated = function(item){
+    return ` Last Updated ${moment(item.updatedAt).fromNow()}`;
+}
