@@ -73,7 +73,7 @@ const generateTodoDOM = (item) => {
         renderTodos(todos, filters);      
     });
 
-    check.addEventListener('change', (e) => {
+    check.addEventListener('change', () => {
         updateTodo(item.id);
         saveTodos(todos);
         renderTodos(todos, filters);
