@@ -16,17 +16,19 @@ document.querySelector('#search_todo').addEventListener('input', (e) => {
 
 document.querySelector('#add_todo_form').addEventListener('submit', (e) => {
     e.preventDefault();
-    let data = e.target.elements.add_todo_text.value;
-    todos.push({
-        id: uuidv4(),
-        text: data,
-        completed: false,
-        createdAt: moment().format('D MMM YYYY, HH:mm:ss'),
-        updatedAt: moment().format('D MMM YYYY, HH:mm:ss')
-    });
-    saveTodos(todos);
-    renderTodos(todos, filters);
-    e.target.elements.add_todo_text.value = '';
+    const data = e.target.elements.add_todo_text.value.trim();
+    if(data.length > 0){
+        todos.push({
+            id: uuidv4(),
+            text: data,
+            completed: false,
+            createdAt: moment().format('D MMM YYYY, HH:mm:ss'),
+            updatedAt: moment().format('D MMM YYYY, HH:mm:ss')
+        });
+        saveTodos(todos);
+        renderTodos(todos, filters);
+        e.target.elements.add_todo_text.value = '';
+    }
 }); 
 
 document.querySelector('#hide_completed').addEventListener('change', (e) => {

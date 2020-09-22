@@ -22,7 +22,9 @@ const saveTodos = (todos) => {
 // Get left todos summary 
 const getLeftTodos = (leftTodos) => {
     const summary = document.createElement('h3');
-    summary.textContent = `You have ${leftTodos.length} todos left`;
+    const plural = leftTodos.length === 1 ? '' : 's'
+    summary.classList.add('list-title');
+    summary.textContent = `You have ${leftTodos.length} todo${plural} left`;
     document.querySelector('#todos_div').appendChild(summary);
 }
 
@@ -47,25 +49,27 @@ const updateTodo = (id) => {
 
 // Creating a new p element for displaying todos
 const generateTodoDOM = (item) => {
-    const todoElement = document.createElement('div');
+    const todoElement = document.createElement('label');
+    const containerEl = document.createElement('div');
     const check = document.createElement("input");
     check.setAttribute("type", "checkbox");
     check.checked = item.completed;
-    const spanElement = document.createElement('span');
-    const textElement = document.createElement('span');
+    const textElement = document.createElement('p');
     const deleteBtn = document.createElement('button');
     const editBtn = document.createElement('button');
 
-    deleteBtn.textContent = 'x';
+    deleteBtn.textContent = 'Remove';
+    deleteBtn.classList.add('button', 'button--text', 'btn-rem-edit');
     textElement.textContent = item.text;
     editBtn.textContent = 'Edit';
-    // spanElement.textContent = lastUpdated(item);
+    editBtn.classList.add('button', 'button--text', 'btn-rem-edit');
 
-    todoElement.appendChild(check);
-    todoElement.appendChild(textElement);
+    todoElement.appendChild(containerEl);
+
+    containerEl.appendChild(check);
+    containerEl.appendChild(textElement);
     todoElement.appendChild(deleteBtn);
     todoElement.appendChild(editBtn);
-    todoElement.appendChild(spanElement);
 
     deleteBtn.addEventListener('click', () => {
         removeTodo(item.id);
@@ -82,6 +86,9 @@ const generateTodoDOM = (item) => {
     editBtn.addEventListener('click', () => {
         location.assign(`${location.origin}/edit.html#${item.id}`);
     });
+
+    todoElement.classList.add('list-item');
+    containerEl.classList.add('list-item__container');
     
     return todoElement;
 };
@@ -108,12 +115,19 @@ const renderTodos = (todos, filters) => {
 
     getLeftTodos(leftTodos);
 
-    filteredTodos.forEach((item) => {
-        if(item.text.length > 0){
-            const todoElement = generateTodoDOM(item);
-            document.querySelector('#todos_div').appendChild(todoElement);
-        }    
-    });
+    if(filteredTodos.length > 0) {
+        filteredTodos.forEach((item) => {
+            if(item.text.length > 0){
+                const todoElement = generateTodoDOM(item);
+                document.querySelector('#todos_div').appendChild(todoElement);
+            }    
+        });
+    } else {
+        const msg = document.createElement('p');
+        msg.classList.add('empty-message');
+        msg.textContent = 'No Todos to Show!';
+        document.querySelector('#todos_div').appendChild(msg);
+    }
 };
 
 // Generate last updated msg 

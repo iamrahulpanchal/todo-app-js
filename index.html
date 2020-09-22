@@ -3,23 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App</title>
+    <title>To-Do App</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/images/favicon.png">
 </head>
 <body>
-    <h1>Todos</h1>
-    <form id="add_todo_form">
-        <input type="text" id="add_todo_text" name="add_todo_text" placeholder="Add a New Todo">
-        <button type="submit" id="add_todo">Add Todo</button>
-    </form><br>
-    <label>
-        <input type="checkbox" id="hide_completed"> Hide Completed.
-    </label><br><br>
-    <input type="text" id="search_todo" placeholder="Search Todo..."><br>
-    <div id="todos_div">
+    <div class="header">
+        <div class="container">
+            <h1 class="header__title">To-Do App</h1>
+            <h2 class="header__subtitle">What Do You Need to Do?</h2>
+        </div>
     </div>
-    
+
+    <div class="actions">
+        <div class="actions__container">
+            <input type="text" class="input" id="search_todo" placeholder="Search Todo..."><br>
+            <label class="checkbox">
+                <input type="checkbox" id="hide_completed"> Hide Completed
+            </label><br><br>
+        </div>
+    </div>
+
+    <div class="container">
+        <form id="add_todo_form">
+            <input type="text" class="input" id="add_todo_text" name="add_todo_text" placeholder="Add a New Todo">
+            <button type="submit" class="button" id="add_todo">Add Todo</button>
+        </form>
+        <div id="todos_div">
+        </div>
+    </div>
+
     <script src="assets/js/uuid.js"></script>
     <script src="assets/js/moment-with-locales.min.js"></script>
     <script src="assets/js/custom/todo-functions.js"></script>
