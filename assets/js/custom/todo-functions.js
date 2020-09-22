@@ -59,7 +59,7 @@ const generateTodoDOM = (item) => {
     deleteBtn.textContent = 'x';
     textElement.textContent = item.text;
     editBtn.textContent = 'Edit';
-    spanElement.textContent = lastUpdated(item);
+    // spanElement.textContent = lastUpdated(item);
 
     todoElement.appendChild(check);
     todoElement.appendChild(textElement);

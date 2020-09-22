@@ -11,10 +11,12 @@ if(todo === undefined){
 }
     
 document.querySelector('#todo-text-edit').value = todo.text;
+document.querySelector('#last-edited').textContent = lastUpdated(todo);
 
 document.querySelector('#todo-text-edit').addEventListener('input', (e) => {
     todo.text = e.target.value;
     todo.updatedAt = moment().format('D MMM YYYY, HH:mm:ss');
+    document.querySelector('#last-edited').textContent = lastUpdated(todo);
     saveTodos(todos);
 });
 
@@ -30,5 +32,6 @@ window.addEventListener('storage', (e) => {
         }
             
         document.querySelector('#todo-text-edit').value = todo.text;
+        document.querySelector('#last-edited').textContent = lastUpdated(todo);
     }
 });
