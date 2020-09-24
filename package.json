@@ -17,6 +17,7 @@
     "babel-loader": "^8.1.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "braces": "^3.0.2",
     "moment": "^2.29.0",
     "uuid": "^8.3.0",
     "webpack": "^4.44.2",
